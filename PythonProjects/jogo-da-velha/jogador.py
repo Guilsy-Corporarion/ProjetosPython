@@ -26,7 +26,16 @@ class JogadorHumano(jogador):
         valid_square = False
         val = None
         while not valid_square:
-            square = input(self.letter + '\'s turn. Input move (0-9):')
-            # nós somos um vai verificar que este um valor correto, tentando lançar
+            square = input(self.letter + '\'s virar. Movimento de entrada (0-9):')
+            # vai verificar que este um valor correto, tentando lançar
             # para um inteiro, e se não é, então dizemos que é inválido
             # é o ponto não é avaliável no conselho, também dizemos que é inválido
+            try:
+                val = int(square)
+                if val not in game.avaiable_moves():
+                    raise ValueError
+                valid_square = True # se funcionar, ótimo!
+            except ValueError:
+                print('Bola Errada. Tente novamente.')
+
+        return val
