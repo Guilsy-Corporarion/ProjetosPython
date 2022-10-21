@@ -1,2 +1,2 @@
 # ProjetosPython
- Alguns progamas  para testes feitos em python
+ Alguns progamas para feitos em Python.
