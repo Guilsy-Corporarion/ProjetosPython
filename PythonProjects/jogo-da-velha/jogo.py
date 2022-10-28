@@ -10,6 +10,8 @@ class JogoDaVelha():
 
     @staticmethod
     def make_board():
+        print('')
+        print('TABELA DE POSIÇÕES')
         return [' ' for _ in range(9)]
 
     def print_board(self):
