@@ -32,17 +32,17 @@ def calc(entry):
 def popupmsg():
     popup = Tk()
     popup.resizable(0, 0)
-    popup.geometry("120x100")
-    popup.title("Alert")
-    label = Label(popup, text="Cannot divide by 0 ! \n Enter valid values")
+    popup.geometry("180x140")
+    popup.title("Alerta")
+    label = Label(popup, text="impossivel dividir por 0 ! \n Insira números válidos")
     label.pack(side="top", fill="x", pady=10)
-    B1 = Button(popup, text="Okay", bg="#DDDDDD", command=popup.destroy)
+    B1 = Button(popup, text="Certo", bg="#DDDDDD", command=popup.destroy)
     B1.pack()
 
 
 def cal():
     root = Tk()
-    root.title("Calc")
+    root.title("Calculadora")
     root.resizable(0, 0)
 
     entry_font = font.Font(size=15)
@@ -126,8 +126,8 @@ def cal():
                       command=lambda: get_input(entry, '**'))
     button18.grid(row=5, column=2, pady=5)
     def quit():
-        exit['command'] = root.quit()
-    exit = Button(root, text='Quit', fg='white', bg='black', command=quit, height=1, width=7)
+        exit['comando'] = root.quit()
+    exit = Button(root, text='Sair', fg='white', bg='dark gray', command=quit, height=1, width=7)
     exit.grid(row=6, column=1)
 
     root.mainloop()
