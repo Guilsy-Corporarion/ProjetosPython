@@ -1,19 +1,19 @@
 import math
-import timer
-from jogador import JogadorHumano, JogadorDeComputadorAleatório, JogadorRoboInteligente
+import time
+from player import HumanPlayer, RandomComputerPlayer, SmartComputerPlayer
 
 
-class JogoDaVelha():
-    def __init__(eu):
-        eu.board = eu.make_board()
-        eu.vencedor_atual = None
+class TicTacToe():
+    def __init__(self):
+        self.board = self.make_board()
+        self.current_winner = None
 
     @staticmethod
     def make_board():
         return [' ' for _ in range(9)]
 
-    def print_board(eu):
-        for row in [eu.board[i*3:(i+1) * 3] for i in range(3)]:
+    def print_board(self):
+        for row in [self.board[i*3:(i+1) * 3] for i in range(3)]:
             print('| ' + ' | '.join(row) + ' |')
 
     @staticmethod
@@ -23,80 +23,80 @@ class JogoDaVelha():
         for row in number_board:
             print('| ' + ' | '.join(row) + ' |')
 
-    def make_move(eu, square, letra):
-        if eu.board[square] == ' ':
-            eu.board[square] = letra
-            if eu.winner(square, letra):
-                eu.vencedor_atual = letra
+    def make_move(self, square, letter):
+        if self.board[square] == ' ':
+            self.board[square] = letter
+            if self.winner(square, letter):
+                self.current_winner = letter
             return True
         return False
 
-    def winner(eu, square, letra):
+    def winner(self, square, letter):
         # check the row
         row_ind = math.floor(square / 3)
-        row = eu.board[row_ind*3:(row_ind+1)*3]
+        row = self.board[row_ind*3:(row_ind+1)*3]
         # print('row', row)
-        if all([s == letra for s in row]):
+        if all([s == letter for s in row]):
             return True
         col_ind = square % 3
-        column = [eu.board[col_ind+i*3] for i in range(3)]
+        column = [self.board[col_ind+i*3] for i in range(3)]
         # print('col', column)
-        if all([s == letra for s in column]):
+        if all([s == letter for s in column]):
             return True
         if square % 2 == 0:
-            diagonal1 = [eu.board[i] for i in [0, 4, 8]]
+            diagonal1 = [self.board[i] for i in [0, 4, 8]]
             # print('diag1', diagonal1)
-            if all([s == letra for s in diagonal1]):
+            if all([s == letter for s in diagonal1]):
                 return True
-            diagonal2 = [eu.board[i] for i in [2, 4, 6]]
+            diagonal2 = [self.board[i] for i in [2, 4, 6]]
             # print('diag2', diagonal2)
-            if all([s == letra for s in diagonal2]):
+            if all([s == letter for s in diagonal2]):
                 return True
         return False
 
-    def quadrados_vazios(eu):
-        return ' ' in eu.board
+    def empty_squares(self):
+        return ' ' in self.board
 
-    def num_quadrados_vazios(eu):
-        return eu.board.count(' ')
+    def num_empty_squares(self):
+        return self.board.count(' ')
 
-    def available_moves(eu):
-        return [i for i, x in enumerate(eu.board) if x == " "]
+    def available_moves(self):
+        return [i for i, x in enumerate(self.board) if x == " "]
 
 
-def play(jogo, x_jogador, o_jogador, imprimir_jogo=True):
+def play(game, x_player, o_player, print_game=True):
 
-    if imprimir_jogo:
-        jogo.print_board_nums()
+    if print_game:
+        game.print_board_nums()
 
-    letra = 'X'
-    while jogo.quadrados_vazios():
-        if letra == 'O':
-            square = o_jogador.get_move(jogo)
+    letter = 'X'
+    while game.empty_squares():
+        if letter == 'O':
+            square = o_player.get_move(game)
         else:
-            square = x_jogador.get_move(jogo)
-        if jogo.make_move(square, letra):
+            square = x_player.get_move(game)
+        if game.make_move(square, letter):
 
-            if imprimir_jogo:
-                print(letra + ' fazer movimento para quadradi {}'.format(square))
-                jogo.print_board()
+            if print_game:
+                print(letter + ' makes a move to square {}'.format(square))
+                game.print_board()
                 print('')
 
-            if jogo.vencedor_atual:
-                if imprimir_jogo:
-                    print(letra + ' vitória!')
-                return letra  # ends the loop and exits the jogo
-            letra = 'O' if letra == 'X' else 'X'  # switches jogador
+            if game.current_winner:
+                if print_game:
+                    print(letter + ' wins!')
+                return letter  # ends the loop and exits the game
+            letter = 'O' if letter == 'X' else 'X'  # switches player
 
         time.sleep(.8)
 
-    if imprimir_jogo:
-        print('É uma gravata!')
+    if print_game:
+        print('It\'s a tie!')
 
 
 
 if __name__ == '__main__':
-    x_jogador = JogadorRoboInteligente('X')
-    o_jogador = JogadorHumano('O')
-    t = JogodaVelha()
-    play(t, x_jogador, o_jogador, imprimir_jogo=True)
+    x_player = SmartComputerPlayer('X')
+    o_player = HumanPlayer('O')
+    t = TicTacToe()
+    play(t, x_player, o_player, print_game=True)
