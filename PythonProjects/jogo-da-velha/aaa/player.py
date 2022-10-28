@@ -1,35 +1,24 @@
-"""
-Tic-Tac-Toe players using inheritance implementation by Kylie YIng
-YouTube Kylie Ying: https://www.youtube.com/ycubed 
-Twitch KylieYing: https://www.twitch.tv/kylieying 
-Twitter @kylieyying: https://twitter.com/kylieyying 
-Instagram @kylieyying: https://www.instagram.com/kylieyying/ 
-Website: https://www.kylieying.com
-Github: https://www.github.com/kying18 
-Programmer Beast Mode Spotify playlist: https://open.spotify.com/playlist/4Akns5EUb3gzmlXIdsJkPs?si=qGc4ubKRRYmPHAJAIrCxVQ 
-"""
-
 import math
 import random
 
 
 class Player():
-    def __init__(self, letter):
-        self.letter = letter
+    def __init__(self, letra):
+        self.letra = letra
 
     def get_move(self, game):
         pass
 
 
 class HumanPlayer(Player):
-    def __init__(self, letter):
-        super().__init__(letter)
+    def __init__(self, letra):
+        super().__init__(letra)
 
     def get_move(self, game):
         valid_square = False
         val = None
         while not valid_square:
-            square = input(self.letter + '\'s turn. Input move (0-9): ')
+            square = input(self.letra + '\'s turn. Input move (0-9): ')
             try:
                 val = int(square)
                 if val not in game.available_moves():
@@ -41,8 +30,8 @@ class HumanPlayer(Player):
 
 
 class RandomComputerPlayer(Player):
-    def __init__(self, letter):
-        super().__init__(letter)
+    def __init__(self, letra):
+        super().__init__(letra)
 
     def get_move(self, game):
         square = random.choice(game.available_moves())
@@ -50,18 +39,18 @@ class RandomComputerPlayer(Player):
 
 
 class SmartComputerPlayer(Player):
-    def __init__(self, letter):
-        super().__init__(letter)
+    def __init__(self, letra):
+        super().__init__(letra)
 
     def get_move(self, game):
         if len(game.available_moves()) == 9:
             square = random.choice(game.available_moves())
         else:
-            square = self.minimax(game, self.letter)['position']
+            square = self.minimax(game, self.letra)['position']
         return square
 
     def minimax(self, state, player):
-        max_player = self.letter  # yourself
+        max_player = self.letra  # yourself
         other_player = 'O' if player == 'X' else 'X'
 
         # first we want to check if the previous move is a winner
