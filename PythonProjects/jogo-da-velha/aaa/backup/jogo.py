@@ -3,7 +3,7 @@ import time
 from jogador import HumanJogador, RandomComputerJogador, SmartComputerJogador
 
 
-class JogoDaVelha():
+class TicTacToe():
     def __init__(self):
         self.board = self.make_board()
         self.current_winner = None
@@ -32,15 +32,15 @@ class JogoDaVelha():
         return False
 
     def winner(self, square, letter):
-        # verificar a linha
+        # check the row
         row_ind = math.floor(square / 3)
         row = self.board[row_ind*3:(row_ind+1)*3]
-        # print('linha', linha)
+        # print('row', row)
         if all([s == letter for s in row]):
             return True
         col_ind = square % 3
         column = [self.board[col_ind+i*3] for i in range(3)]
-        # print('col', coluna)
+        # print('col', column)
         if all([s == letter for s in column]):
             return True
         if square % 2 == 0:
@@ -78,31 +78,25 @@ def play(game, x_Jogador, o_Jogador, print_game=True):
         if game.make_move(square, letter):
 
             if print_game:
-                print('')
-                print(letter + ' Fez um movimento.')
-                print('')
+                print(letter + 'Faça um movimento com o quadrado. {}'.format(square))
                 game.print_board()
                 print('')
 
             if game.current_winner:
                 if print_game:
-                    print('')
-                    print(letter + ' Venceu!')
-                    print('')
-                return letter  # termina o loop e finalizar oo jogo
-            letter = 'O' if letter == 'X' else 'X'  # Interromper Jogador
+                    print(letter + ' venceu!')
+                return letter  # ends the loop and exits the game
+            letter = 'O' if letter == 'X' else 'X'  # switches Jogador
 
         time.sleep(.8)
 
     if print_game:
-        print('')
-        print('VELHA!')
-        print('')
+        print('It\'s a tie!')
 
 
 
 if __name__ == '__main__':
     x_Jogador = SmartComputerJogador('X')
     o_Jogador = HumanJogador('O')
-    t = JogoDaVelha()
+    t = TicTacToe()
     play(t, x_Jogador, o_Jogador, print_game=True)

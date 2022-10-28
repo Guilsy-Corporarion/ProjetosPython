@@ -18,15 +18,14 @@ class HumanJogador(Jogador):
         valid_square = False
         val = None
         while not valid_square:
-            square = input(self.letra + ', Faça um movimento (0-8): ')
+            square = input(self.letra + '\'s turn. Input move (0-9): ')
             try:
                 val = int(square)
                 if val not in game.available_moves():
                     raise ValueError
                 valid_square = True
             except ValueError:
-                print('')
-                print('Movimento invalido, tente novamente.')
+                print('Invalid square. Try again.')
         return val
 
 
@@ -47,37 +46,37 @@ class SmartComputerJogador(Jogador):
         if len(game.available_moves()) == 9:
             square = random.choice(game.available_moves())
         else:
-            square = self.minimax(game, self.letra)['posição']
+            square = self.minimax(game, self.letra)['position']
         return square
 
     def minimax(self, state, Jogador):
-        max_Jogador = self.letra  # você
+        max_Jogador = self.letra  # yourself
         other_Jogador = 'O' if Jogador == 'X' else 'X'
 
-        # primeiro queremos verificar se o movimento anterior é um vencedor
+        # first we want to check if the previous move is a winner
         if state.current_winner == other_Jogador:
-            return {'posição': None, 'pontos': 1 * (state.num_empty_squares() + 1) if other_Jogador == max_Jogador else -1 * (
+            return {'position': None, 'score': 1 * (state.num_empty_squares() + 1) if other_Jogador == max_Jogador else -1 * (
                         state.num_empty_squares() + 1)}
         elif not state.empty_squares():
-            return {'posição': None, 'pontos': 0}
+            return {'position': None, 'score': 0}
 
         if Jogador == max_Jogador:
-            best = {'posição': None, 'pontos': -math.inf}  # A cada ponto maximiza
+            best = {'position': None, 'score': -math.inf}  # each score should maximize
         else:
-            best = {'posição': None, 'pontos': math.inf}  # A cada ponto diminui
+            best = {'position': None, 'score': math.inf}  # each score should minimize
         for possible_move in state.available_moves():
             state.make_move(possible_move, Jogador)
-            sim_pontos = self.minimax(state, other_Jogador)  # simular um jogo depois de fazer esse movimento
+            sim_score = self.minimax(state, other_Jogador)  # simulate a game after making that move
 
-            # desfazer um movimento
+            # undo move
             state.board[possible_move] = ' '
             state.current_winner = None
-            sim_pontos['posição'] = possible_move  # isso representa o movimento ideal para o próximo movimento
+            sim_score['position'] = possible_move  # this represents the move optimal next move
 
-            if Jogador == max_Jogador:  # X Jogador máximo
-                if sim_pontos['pontos'] > best['pontos']:
-                    best = sim_pontos
+            if Jogador == max_Jogador:  # X is max Jogador
+                if sim_score['score'] > best['score']:
+                    best = sim_score
             else:
-                if sim_pontos['pontos'] < best['pontos']:
-                    best = sim_pontos
+                if sim_score['score'] < best['score']:
+                    best = sim_score
         return best
