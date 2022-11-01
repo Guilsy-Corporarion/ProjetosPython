@@ -1,0 +1,1 @@
+print("Insira as notas: ")
