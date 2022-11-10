@@ -1,3 +1,14 @@
+import pandas as pd
+import random
+
+dados= [["O que é uma Linguagem de Programação?", "Uma Batata", "É um conjunto de instruções para automatizar tarefas", "Arroz", "Molho", "B"],
+            ["Quem descobriu o Brasil?", "Ainsten", "Santos Dumont", "Elon Musk", "Pedro Alvares Cabral", "D"],
+            ["Qual foi o primiero console inventado?", "Magnavox Odyssey", "Play Station 5", "PSP", "Mega Drive", "A"],
+            ["Quantos fusos horários existem na Rússia?", "5", "11", "13", "22", "B"]]
+
+df = pd.DataFrame(dados, columns=["PERGUNTAS", "Alternativa A", "Alternativa B", "Alternativa C", "Alternativa D", "Alternativas Corretas"])
+
+
 #ÍNICIO
 
 nome = input("Escreva o seu nome: ")
@@ -17,77 +28,35 @@ pontos = 0
 
 
 #PRIMEIRA PERGUNTA
-print("")
-print("| PRIMEIRA PERGUNTA |")
-print("")
-print("PYTHON É UMA: \n")
-print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-print('1. Linguagem de Programação')
-print('2. Uma cobra')
-print('3. Streamer')
-print('4. Nenhum destes')
-print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-print("")
-resposta=int( input('PYTHON É UMA: (1, 2, 3 or 4) \n'))
-print("")
 
-if (resposta==1) or (resposta==2):
+n=0
+
+while(n <4):
+    questao = random.randint(0,4)
     print("")
-    print('Correto!')
+    #print("| PRIMEIRA PERGUNTA |")
     print("")
-    pontos += 1
-else:
+    print(df["PERGUNTAS"][questao])
+    print(df["Alternativa A"][questao])
+    print(df["Alternativa B"][questao])
+    print(df["Alternativa C"][questao])
+    print(df["Alternativa D"][questao])
     print("")
-    print('Incorreto!')
+    resposta=input('PYTHON É UMA: (A, B, C or D) \n')
+    resposta.upper()
     print("")
+
+    if (resposta==df["Alternativas Corretas"][questao]):
+        print("")
+        print('Correto!')
+        print("")
+        pontos += 1
+    else:
+        print("")
+        print('Incorreto!')
+        print("")
+    n=n+1
     
-
-#SEGUNDA PERGUNTA
-
-
-print("")
-print("| SEGUNDA PERGUNTA |")
-print("")
-anwer = input("HTML é uma linguagem de progamação? (s/n) \n")
-if anwer.lower() == "n":
-    print("")
-    print("Correto!")
-    print("")
-    pontos += 1
-else:
-    print("")
-    print("Incorreto!")
-    print("")
-
-
-#TERCEIRA PERGUNTA
-
-
-print("")
-print("| TERCEIRA PERGUNTA |")
-print("")
-print("-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-print('1. Um profissional de T.I')
-print('2. Uma pessoa que mexe com Python')
-print('3. Um Nerd')
-print('4. Nenhum destes')
-print("-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-print("")
-resposta=int( input('O PROGRAMADOR É: (1, 2, 3 or 4) \n') )
-print("")
-
-if (resposta==1):
-    print("")
-    print('Correto! (+1 PONTO)')
-    print("")
-    pontos += 1
-else:
-    print("")
-    print('Incorreto! (-1 PONTO)')
-    print("")
-    pontos -= 1
-
-
 #FINAL
 
 
