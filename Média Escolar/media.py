@@ -1,1 +1,0 @@
-print("Insira as notas: ")
