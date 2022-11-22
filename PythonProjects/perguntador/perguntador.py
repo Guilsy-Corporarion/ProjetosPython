@@ -64,7 +64,7 @@ else:
 
 
 print("")
-print("| TERCEIRA PERGUNTA |")
+print("| TERCEIRA PERGUNTA! |")
 print("")
 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-")
 print('1. Um profissional de T.I')
