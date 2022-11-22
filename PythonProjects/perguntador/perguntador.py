@@ -46,7 +46,7 @@ df = pd.DataFrame(dados, columns=["PERGUNTAS", "Alternativa A", "Alternativa B",
 # Ínicio.
 
 print("")
-print("     BEM VINDO AO QUIZ!")
+print("    BEM VINDO AO QUIZ!")
 print("")
 nome = input("Escreva o seu nome: ")
 print("")
