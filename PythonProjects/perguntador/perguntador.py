@@ -31,7 +31,7 @@ dados= [["QUESTÃO: O que é uma Linguagem de Programação?", "A) Uma Batata", 
             
             ["QUESTÃO: Qual país não faz parte da África?", "A) Gana", "B) Nepal", "C) Nigéria", "D) Etiópia", "b"],
             
-            ["QUESTÃO: Qual é a população atual da Cidade do Vaticano?", "A) 801", "B) 825", "C) 1.801", "D)1,825", "a"],
+            ["QUESTÃO: Qual é a população atual da Cidade do Vaticano?", "A) 801", "B) 825", "C) 1.801", "D)1.825", "a"],
             
             ["QUESTÃO: Qual o nome do deus da guerra?", "A) Kratos", "B) Ades", "C) Ares", "D) Perseu", "c"],
             
